@@ -54,12 +54,28 @@ table {
 	width: 600px;
 	/*height: 300px;*/
 	margin: 0 auto;
-	background-color: yellow;
+	/*background-color: yellow;*/
 }
 header{
 	height: 150px;
-	background-color: green;
 }
+h3{
+	font-size: 28px;
+	font-family: 'Helvetica';
+	color: rgb(150,150,150);
+	margin: 20px 70px 20px 70px ;
+}
+.result, #score_value{
+	font-size: 24px;
+	font-family: 'Helvetica';
+	color: rgb(150,150,150);
+	margin: 20px 90px 20px 250px ;
+}
+#score_value{
+	margin: 0;
+	display: inline;
+}
+
 .board{
 	margin: 0 auto;
 	position: relative;

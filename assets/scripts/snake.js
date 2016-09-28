@@ -25,6 +25,8 @@ var snake = {
 var food = {
 	position: [0,0]
 }
+var foodEaten = 0;
+var score = 0;
 
 function gameLoop(board){
 	var end = false;
@@ -57,6 +59,13 @@ function eatFood(board){
 	}
 	renderChange(snake.tail[snake.tail.length-1], board);
 	createFood(board);
+	foodEaten += 1;
+	score += foodEaten;
+	timeStep = Math.floor(timeStep*0.95);
+	console.log("New timeStep: "+timeStep);
+	$('#score_value').text(score);
+	stopGame();
+	gameLoop(board);
 }
 function move(board){
 	var x = snake.position[0];
@@ -91,7 +100,7 @@ function move(board){
 			}
 			break;
 	}
-	console.log(" x "+snake.position[0]+" y "+snake.position[1]);
+	//console.log(" x "+snake.position[0]+" y "+snake.position[1]);
 	if(board[snake.position[1]][snake.position[0]] == "x"){
 		eatFood(board);
 	} else if(board[snake.position[1]][snake.position[0]] == "o"){
@@ -146,7 +155,7 @@ function changeDirection(k){
 			}
 			break;
 	}
-	console.log(" --> current snake direction "+snake.direction);
+	//console.log(" --> current snake direction "+snake.direction);
 }
 
 function initBoard(){
