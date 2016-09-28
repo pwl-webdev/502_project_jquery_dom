@@ -30,7 +30,7 @@ function gameLoop(board){
 	var end = false;
 		animation = window.setInterval(function(){
 			if(move(board)){
-				render(board);
+				//render(board);
 			}
 		}, timeStep);
 }
@@ -46,6 +46,7 @@ function createFood(board){
 	} while(board[food.position[1]][food.position[0]] != " ");
 	console.log("food "+food.position[0]+" "+food.position[1]);
 	board[food.position[1]][food.position[0]] = "x";
+	renderChange([food.position[1],food.position[0]],board);
 }
 
 function eatFood(board){
@@ -54,6 +55,7 @@ function eatFood(board){
 	} else{
 		snake.tail.push([snake.position[0],snake.position[1]]);
 	}
+	renderChange(snake.tail[snake.tail.length-1], board);
 	createFood(board);
 }
 function move(board){
@@ -98,15 +100,20 @@ function move(board){
 	}
 
 	board[snake.position[1]][snake.position[0]] = "O";
+	renderChange([snake.position[1],snake.position[0]],board);
 	
 	if(snake.tail.length > 0){
 		var temp = snake.tail.pop();
 		board[temp[1]][temp[0]] = " ";
+		renderChange([temp[1],temp[0]], board);
+
 		temp = [x,y];
 		board[temp[1]][temp[0]] = "o";
+		renderChange([temp[1],temp[0]], board);
 		snake.tail.unshift(temp);
 	} else{
 		board[y][x] = " ";
+		renderChange([y,x],board);
 	}
 	return true;
 }
@@ -158,7 +165,11 @@ function render(b){
 	$('.board').empty();
 	for(var i = 0; i < b.length; i++){
 		for(var j = 0; j < b[i].length; j++){
-			$('.board').append(`<div class="cell">${b[i][j]}</div>`);
+			$('.board').append(`<div class="cell" id="r${i}c${j}"">${b[i][j]}</div>`);
 		}
 	}
+}
+
+function renderChange(pos, b){
+	$(`#r${pos[0]}c${pos[1]}`).text(b[pos[0]][pos[1]]);
 }
