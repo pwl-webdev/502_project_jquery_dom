@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 var size = 40;
 var middle = 19;
-var timeStep = 10;
+var timeStep = 200;
 var animation;
 var snake = {
 	position: [middle,middle],
@@ -172,4 +172,20 @@ function render(b){
 
 function renderChange(pos, b){
 	$(`#r${pos[0]}c${pos[1]}`).text(b[pos[0]][pos[1]]);
+	if(b[pos[0]][pos[1]] == " "){
+		//remove class
+		$(`#r${pos[0]}c${pos[1]}`).removeClass('snake_head');
+		$(`#r${pos[0]}c${pos[1]}`).removeClass('snake_tail');
+		$(`#r${pos[0]}c${pos[1]}`).removeClass('food');
+	} else if( b[pos[0]][pos[1]] == "O"){
+		//snake head
+		$(`#r${pos[0]}c${pos[1]}`).addClass('snake_head');
+	} else if(b[pos[0]][pos[1]] == "o"){
+		//snake tail
+		$(`#r${pos[0]}c${pos[1]}`).addClass('snake_tail');		
+	} else if (b[pos[0]][pos[1]] == "x"){
+		//food
+		$(`#r${pos[0]}c${pos[1]}`).addClass('food');
+	}
+
 }

@@ -74,9 +74,21 @@ header{
 	width: 15px;
 	height: 15px;
 	background-color: black;
-	border-top: 1px solid grey;
-	border-left: 1px solid grey;
+	/*border-top: 1px solid grey;
+	border-left: 1px solid grey;*/
 	font-size: 15px;
 	line-height: 15px;
-	color: yellow;
+	color: rgba(0,0,0,0);
+}
+.snake_head{
+	background-image: url("../images/snake_head.png");
+	background-size: 15px 15px;
+}
+.snake_tail{
+	background-image: url("../images/snake_tail.png");
+	background-size: 15px 15px;
+}
+.food{
+	background-image: url("../images/food.png");
+	background-size: 15px 15px;	
 }
