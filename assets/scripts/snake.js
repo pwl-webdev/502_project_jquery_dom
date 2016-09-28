@@ -3,14 +3,14 @@ $(document).ready(function(){
 	var board = initBoard();
 	//console.log(board);
 	render(board);
-	createFood(board);
+	//createFood(board);
 
 	$(window).keypress(function(event) {
   		//console.log( "Handler for .keypress() called."+event.key);
-  		changeDirection(event.key);
+  		changeDirection(event.key, board);
 	});
 
-	gameLoop(board);
+	//gameLoop(board);
 });
 
 var size = 40;
@@ -27,6 +27,23 @@ var food = {
 }
 var foodEaten = 0;
 var score = 0;
+
+function resetGame(board){
+	console.log("--Resetting game--");
+	board = initBoard();
+	$(`.cell`).removeClass('snake_head');
+	$(`.cell`).removeClass('snake_tail');
+	$(`.cell`).removeClass('food');
+	timeStep = 200;
+	snake.tail = [];
+	snake.position = [middle, middle];
+	snake.direction = 'r';
+	createFood(board);
+	foodEaten = 0;
+	score = 0;
+	stopGame();
+	gameLoop(board);
+}
 
 function gameLoop(board){
 	var end = false;
@@ -132,7 +149,7 @@ function move(board){
 		board[]
 	}
 }*/
-function changeDirection(k){
+function changeDirection(k, board){
 	switch(k){
 		case "ArrowUp":
 			if(snake.direction != "d"){
@@ -153,6 +170,9 @@ function changeDirection(k){
 			if(snake.direction != "l"){
 				snake.direction = "r"
 			}
+			break;
+		case "Enter":
+			resetGame(board);
 			break;
 	}
 	//console.log(" --> current snake direction "+snake.direction);
